@@ -14,7 +14,7 @@
     :root {
       --bg:      #070707;
       --text:    #f0ede6;
-      --muted:   rgba(240,237,230,0.36);
+      --muted:   rgba(240,237,230,0.50);
       --border:  rgba(240,237,230,0.09);
       --primary: #c3c0ff;
       --accent:  #ffb695;
@@ -38,6 +38,23 @@
     ::-webkit-scrollbar { width: 3px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: rgba(240,237,230,0.12); }
+
+    /* ─── GLITCH EFFECT ─── */
+    @keyframes pixelGlitch {
+      0% { transform: translate(0); filter: none; }
+      10% { transform: translate(-2px, 1px) skewX(10deg); filter: drop-shadow(-2px 0 0 var(--accent)); }
+      15% { transform: translate(2px, -2px) skewX(-15deg); filter: drop-shadow(2px 0 0 var(--green)) invert(0.2); }
+      20% { transform: translate(0, 0) scale(1.1); filter: hue-rotate(90deg); }
+      25% { transform: translate(-1px, 2px) skewX(5deg); filter: drop-shadow(-2px 0 0 var(--primary)); }
+      30% { transform: translate(0); filter: none; }
+      100% { transform: translate(0); filter: none; }
+    }
+    
+    .dp-btn:hover .dp-icon svg,
+    .dl-card:not(.off):hover .dl-icon-os svg,
+    .priv-note:hover svg {
+      animation: pixelGlitch 1.5s infinite linear;
+    }
 
     /* ─── CURSOR ─── */
     .cursor {
@@ -203,6 +220,10 @@
     .sec-t i { font-style: italic; font-weight: 400; }
     @media (max-width: 700px) {
       .hero, .sec { padding: 0 24px; }
+      .hero { min-height: auto; }
+      .hero-body { justify-content: flex-start; padding-top: 120px; padding-bottom: 48px; }
+      .hero-h1 { font-size: clamp(44px,12vw,152px); margin-bottom: 36px; }
+      .hero-desc { max-width: 100%; }
       .sec-head { grid-template-columns: 44px 1fr; }
     }
 
@@ -253,18 +274,42 @@
     }
     .demo-r { padding: 52px 0 52px 52px; display: flex; flex-direction: column; }
     .demo-intro { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 40px; }
-    .dp-list { display: flex; flex-direction: column; gap: 8px; }
+    .dp-list { display: flex; flex-direction: column; gap: 10px; }
     .dp-btn {
-      font-family: var(--body); font-size: 13px; font-weight: 400;
-      color: var(--muted); background: none;
-      border: 1px solid var(--border); border-radius: 8px;
-      padding: 13px 18px; text-align: left; cursor: none;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-      display: flex; align-items: center; gap: 10px;
+      font-family: var(--body); font-size: 14px; font-weight: 500;
+      color: var(--text); background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08); border-radius: 14px;
+      padding: 16px 18px; text-align: left; cursor: none;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s, box-shadow 0.25s;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .dp-icon {
+      font-size: 28px; flex-shrink: 0;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .dp-content { flex: 1; min-width: 0; }
+    .dp-title { font-weight: 500; font-size: 14px; color: var(--text); }
+    .dp-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .dp-arrow {
+      width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: var(--muted);
+      transition: border-color 0.25s, color 0.25s, background 0.25s;
     }
     .dp-btn:hover:not(:disabled) {
-      border-color: rgba(195,192,255,0.3);
-      color: var(--text); background: rgba(195,192,255,0.03);
+      border-color: rgba(195,192,255,0.35);
+      background: rgba(195,192,255,0.07);
+      transform: scale(1.02);
+      box-shadow: 0 4px 20px rgba(195,192,255,0.06);
+    }
+    .dp-btn:hover:not(:disabled) .dp-arrow {
+      border-color: rgba(195,192,255,0.4); color: var(--primary);
+      background: rgba(195,192,255,0.08);
+    }
+    .dp-btn:active:not(:disabled) {
+      transform: scale(0.98);
     }
     .dp-btn:disabled { opacity: 0.22; }
     .dp-reset {
@@ -297,11 +342,24 @@
     .td { width: 4px; height: 4px; border-radius: 50%; background: var(--muted); animation: tdance 1.2s ease-in-out infinite; }
     .td:nth-child(2){ animation-delay:.18s }
     .td:nth-child(3){ animation-delay:.36s }
+    .cv-cursor {
+      display: inline-block; width: 2px; height: 16px; background: var(--muted);
+      margin-left: 4px; vertical-align: text-bottom;
+      animation: cursorBlink 1s step-end infinite;
+    }
+    @keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
     @media (max-width: 800px) {
       .demo-grid { grid-template-columns: 1fr; }
       .demo-l { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 0; }
       .demo-r { padding: 40px 0 52px; }
+      .dp-btn:not(:disabled) {
+        animation: dpGlow 2.8s ease-in-out infinite;
+      }
+    }
+    @keyframes dpGlow {
+      0%, 100% { border-color: rgba(195,192,255,0.08); box-shadow: none; }
+      50% { border-color: rgba(195,192,255,0.28); box-shadow: 0 0 12px rgba(195,192,255,0.06); }
     }
 
     /* ─── PRIVACY ─── */
@@ -575,10 +633,26 @@
     <div class="demo-l ri">
       <p class="demo-intro">Not a chatbot. An AI that knows your context and actually has a personality. Choose a scenario below, or try insulting it. I dare you.</p>
       <div class="dp-list">
-        <button class="dp-btn" onclick="go('schedule')">📅&nbsp; Help me plan today</button>
-        <button class="dp-btn" onclick="go('privacy')">🔒&nbsp; Wait, can you see my data?</button>
-        <button class="dp-btn" onclick="go('rude')">😈&nbsp; Be rude to it</button>
-        <button class="dp-btn" onclick="go('social')">🎉&nbsp; Any ideas for this weekend?</button>
+        <button class="dp-btn" onclick="go('schedule')">
+          <span class="dp-icon"><svg width="24" height="24" viewBox="0 0 24 24" shape-rendering="crispEdges"><path d="M6 7h16v15H6z" fill="#000" fill-opacity="0.4"/><path d="M4 5h16v15H4z" fill="var(--muted)" fill-opacity="0.15"/><path d="M4 5h16v1H4z M4 6h1v13H4z M19 6h1v13h-1z M4 19h16v1H4z" fill="var(--text)"/><path d="M5 5h14v4H5z" fill="var(--primary)"/><path d="M7 11h2v2H7z M11 11h2v2h-2z M15 11h2v2h-2z M7 15h2v2H7z M11 15h2v2h-2z" fill="var(--text)"/><path d="M7 3h2v3H7z M15 3h2v3h-2z" fill="var(--text)"/><path d="M15 15h2v2h-2z" fill="var(--accent)"><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.1;0.5;0.6;1" dur="2s" repeatCount="indefinite" /></path></svg></span>
+          <div class="dp-content"><div class="dp-title">Help me plan today</div><div class="dp-sub">Get a plan tailored to your day.</div></div>
+          <span class="dp-arrow">›</span>
+        </button>
+        <button class="dp-btn" onclick="go('privacy')">
+          <span class="dp-icon"><svg width="24" height="24" viewBox="0 0 24 24" shape-rendering="crispEdges"><path d="M7 10h14v12H7z" fill="#000" fill-opacity="0.4"/><path d="M8 8V5h8v3h2V5h-2V3H8v2H6v3h2z" fill="var(--text)"/><path d="M10 5h4v3h-4z" fill="var(--bg)"/><path d="M5 8h14v12H5z M6 19h12v1H6z M6 7h12v1H6z" fill="var(--green)"/><path d="M11 12h2v3h-2z M10 15h4v2h-4z" fill="var(--bg)"/><path d="M11 12h2v3h-2z M10 15h4v2h-4z" fill="var(--text)" opacity="0"><animate attributeName="opacity" values="0;0.5;0" dur="2s" repeatCount="indefinite" /></path></svg></span>
+          <div class="dp-content"><div class="dp-title">Wait, can you see my data?</div><div class="dp-sub">Let's talk privacy and control.</div></div>
+          <span class="dp-arrow">›</span>
+        </button>
+        <button class="dp-btn" onclick="go('rude')">
+          <span class="dp-icon"><svg width="24" height="24" viewBox="0 0 24 24" shape-rendering="crispEdges"><path d="M7 10h14v10H7z" fill="#000" fill-opacity="0.4"/><path d="M5 8h14v10H5z M6 7h12v1H6z M7 6h10v1H7z M6 18h12v1H6z M7 19h10v1H7z" fill="var(--accent)"/><path d="M5 4h2v3H5z M17 4h2v3h-2z M6 3h1v1H6z M17 3h1v1h-1z" fill="var(--primary)"/><path d="M8 10h2v2H8z M14 10h2v2h-2z M7 9h2v1H7z M15 9h2v1h-2z" fill="var(--bg)"><animate attributeName="opacity" values="1;1;0;1;1" keyTimes="0;0.92;0.95;0.98;1" dur="4s" repeatCount="indefinite" /></path><path d="M7 10h4v1H7z M13 10h4v1h-4z" fill="var(--bg)" opacity="0"><animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.92;0.95;0.98;1" dur="4s" repeatCount="indefinite" /></path><path d="M10 14h4v1h-4z M14 13h1v1h-1z M9 13h1v1H9z" fill="var(--bg)"/></svg></span>
+          <div class="dp-content"><div class="dp-title">Be rude to it</div><div class="dp-sub">Push its limits and have fun.</div></div>
+          <span class="dp-arrow">›</span>
+        </button>
+        <button class="dp-btn" onclick="go('social')">
+          <span class="dp-icon"><svg width="24" height="24" viewBox="0 0 24 24" shape-rendering="crispEdges"><path d="M6 22l6-6 4 4-6 6z" fill="#000" fill-opacity="0.4"/><path d="M4 20l6-6 4 4-6 6z" fill="var(--muted)"/><path d="M4 20l4-4 2 2-4 4z" fill="var(--text)"/><g><animateTransform attributeName="transform" type="translate" values="0,0; 0,-2; 0,0" dur="1.5s" repeatCount="indefinite" /><path d="M14 6h2v2h-2z M18 10h2v2h-2z M10 4h2v2h-2z" fill="var(--primary)"/><path d="M17 5h2v2h-2z M11 9h2v2h-2z" fill="var(--accent)"/><path d="M15 13h2v2h-2z M20 7h2v2h-2z M14 2h2v2h-2z M6 10h2v2H6z" fill="var(--green)"/></g></svg></span>
+          <div class="dp-content"><div class="dp-title">Any ideas for this weekend?</div><div class="dp-sub">Get creative suggestions.</div></div>
+          <span class="dp-arrow">›</span>
+        </button>
         <button class="dp-reset" id="dpReset" onclick="resetDemo()">↺ Reset conversation</button>
       </div>
     </div>
@@ -586,7 +660,7 @@
       <div class="convo" id="convo">
         <div class="cv-msg vis">
           <div class="cv-who ai">Primnox</div>
-          <div class="cv-text ai">Hey. What do you need?</div>
+          <div class="cv-text ai">Hey. What do you need?<span class="cv-cursor"></span></div>
         </div>
       </div>
       <div class="cv-typing" id="cvTyping">
@@ -607,7 +681,7 @@
     <div class="priv-l">
       <p class="priv-desc">You can't trust a server. You can trust local code. We're building on-device scrubbing, a small local model that strips your personal details before any cloud AI ever touches them.</p>
       <div class="priv-note">
-        <span>⏳</span>
+        <span style="padding-top:2px"><svg width="18" height="18" viewBox="0 0 18 18" shape-rendering="crispEdges"><path d="M5 4h12v12H5z" fill="#000" fill-opacity="0.4"/><path d="M3 2h12v2H3z M3 14h12v2H3z" fill="var(--text)"/><path d="M4 4h10v2H4z M5 6h8v2H5z M6 8h6v2H6z M7 10h4v2H7z M6 12h6v2H6z" fill="var(--muted)" fill-opacity="0.2"/><path d="M4 4h2v2H4z M12 4h2v2h-2z M5 6h2v2H5z M11 6h2v2h-2z M6 8h2v2H6z M10 8h2v2h-2z M6 12h2v2H6z M10 12h2v2h-2z M5 14h2v2H5z M11 14h2v2h-2z" fill="var(--muted)"/><path d="M6 4h6v2H6z M7 6h4v1H7z" fill="var(--accent)"><animate attributeName="opacity" values="1;0;1" dur="3s" repeatCount="indefinite" /></path><path d="M8 8h2v2H8z" fill="var(--accent)"><animateTransform attributeName="transform" type="translate" values="0,-2; 0,2; 0,-2" dur="0.5s" repeatCount="indefinite" /><animate attributeName="opacity" values="0;1;0" dur="0.5s" repeatCount="indefinite" /></path><path d="M7 13h4v1H7z M6 14h6v2H6z" fill="var(--accent)"/></svg></span>
         <span>Local scrubbing is in active development, shipping in a future release. Until then, you control exactly what context you share.</span>
       </div>
       <div class="priv-stats-grid">
@@ -674,7 +748,7 @@
     <div class="dl-grid ri">
       <div class="dl-card">
         <div>
-          <div class="dl-icon-os">🪟</div>
+          <div class="dl-icon-os"><svg width="32" height="32" viewBox="0 0 24 24" shape-rendering="crispEdges"><path d="M5 6h16v16H5z" fill="#000" fill-opacity="0.4"/><path d="M3 4h8v8H3z M13 4h8v8h-8z M3 13h8v8H3z M13 13h8v8h-8z" fill="var(--primary)"/><path d="M4 5h6v1H4z M4 6h1v6H4z M14 5h6v1h-6z M14 6h1v6h-1z" fill="#fff" opacity="0"><animate attributeName="opacity" values="0;0.6;0;0" keyTimes="0;0.1;0.2;1" dur="4s" repeatCount="indefinite" /></path></svg></div>
           <div class="dl-os">Windows</div>
           <div class="dl-tag avail">● Beta, available now</div>
         </div>
@@ -684,14 +758,14 @@
       </div>
       <div class="dl-card off">
         <div>
-          <div class="dl-icon-os">🍎</div>
+          <div class="dl-icon-os"><svg width="32" height="32" viewBox="0 0 24 24" shape-rendering="crispEdges"><path d="M9 8h8v12H9z" fill="#000" fill-opacity="0.4"/><path d="M12 2h2v3h-2z" fill="var(--muted)"><animateTransform attributeName="transform" type="translate" values="0,0; 0,-1; 0,0" dur="2s" repeatCount="indefinite" /></path><path d="M7 6h7v2h3v3h-2v4h2v3h-3v2h-3v2h-4v-2H5v-3H4V8h3V6z" fill="var(--text)"/></svg></div>
           <div class="dl-os">macOS</div>
           <div class="dl-tag soon">◌ Coming soon</div>
         </div>
       </div>
       <div class="dl-card off">
         <div>
-          <div class="dl-icon-os">🐧</div>
+          <div class="dl-icon-os"><svg width="32" height="32" viewBox="0 0 24 24" shape-rendering="crispEdges"><path d="M10 6h8v16h-8z" fill="#000" fill-opacity="0.4"/><path d="M8 4h8v4h2v10h-2v4h-2v-2H10v2H8v-4H6V8h2z" fill="var(--muted)"/><path d="M9 10h6v8H9z M9 6h6v4H9z" fill="var(--text)"/><path d="M10 8h1v2h-1z M13 8h1v2h-1z" fill="var(--bg)"><animate attributeName="opacity" values="1;1;0;1;1" keyTimes="0;0.9;0.95;0.98;1" dur="5s" repeatCount="indefinite" /></path><path d="M10 9h1v1h-1z M13 9h1v1h-1z" fill="var(--bg)" opacity="0"><animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.9;0.95;0.98;1" dur="5s" repeatCount="indefinite" /></path><path d="M11 10h2v2h-2z M6 20h4v2H6z M14 20h4v2h-4z" fill="var(--accent)"/></svg></div>
           <div class="dl-os">Linux</div>
           <div class="dl-tag soon">◌ Coming soon</div>
         </div>
