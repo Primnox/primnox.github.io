@@ -251,6 +251,11 @@
       text-transform: uppercase; color: var(--accent);
       border: 1px solid rgba(255,182,149,0.22); border-radius: 100px; padding: 3px 10px;
     }
+    .feat-live {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--green);
+      border: 1px solid rgba(52,211,153,0.3); border-radius: 100px; padding: 3px 10px;
+    }
     .feat-desc { font-size: 14px; color: var(--muted); line-height: 1.75; max-width: 580px; }
     .feat-arr {
       font-size: 18px; color: var(--border); padding-top: 4px;
@@ -492,13 +497,13 @@
   <div class="hero-body">
     <div class="hero-eyebrow">
       <span class="eyebrow-num">00 /</span>
-      <span class="eyebrow-pill">v0.1.0 · Windows Beta</span>
+      <span class="eyebrow-pill">v0.1.1 · Windows Beta</span>
     </div>
     <h1 class="hero-h1">
       The AI<br>That <i>Actually</i><br>Gives A Damn.
     </h1>
     <div class="hero-split">
-      <p class="hero-desc">Your personal OS, unified calendar, tasks, notes, and AI with actual personality. Privacy-first architecture in active development.</p>
+      <p class="hero-desc">Your personal OS, unified calendar, tasks, notes, and AI with actual personality. Privacy-first by design, on-device PII scrubbing now live.</p>
       <div class="hero-btns">
         <a href="https://github.com/Primnox/public" class="btn-solid" target="_blank" rel="noopener">
           Download for Windows ↗
@@ -595,11 +600,11 @@
     <div class="feat-body">
       <div class="feat-title">
         Local Privacy Scrubbing
-        <span class="feat-soon">Coming Soon</span>
+        <span class="feat-live">Live · v0.1.1</span>
       </div>
-      <div class="feat-desc">An on-device model will strip PII (names, emails, passwords, keys) before your context reaches any cloud AI. The cloud brain will never know who you actually are. This is what we're building toward.</div>
+      <div class="feat-desc">An on-device model strips PII (names, emails, passwords, keys) and swaps it for placeholders before your context reaches any cloud AI, then restores it in the reply. It only kicks in for cloud calls; local models get the raw text. The cloud brain never learns who you actually are.</div>
     </div>
-    <div class="feat-arr" style="color:rgba(255,182,149,0.2)">↗</div>
+    <div class="feat-arr">↗</div>
   </div>
 </section>
 
@@ -675,18 +680,18 @@
 <section class="sec" id="privacy">
   <div class="sec-head">
     <div class="sec-n ri">03 /</div>
-    <h2 class="sec-t ri d1">Privacy<br><i>Roadmap.</i></h2>
+    <h2 class="sec-t ri d1">Privacy<br><i>Architecture.</i></h2>
   </div>
   <div class="priv-grid ri">
     <div class="priv-l">
-      <p class="priv-desc">You can't trust a server. You can trust local code. We're building on-device scrubbing, a small local model that strips your personal details before any cloud AI ever touches them.</p>
+      <p class="priv-desc">You can't trust a server. You can trust local code. On-device scrubbing, a small local model, strips your personal details before any cloud AI ever touches them, and rehydrates the reply so you still read real names.</p>
       <div class="priv-note">
-        <span style="padding-top:2px"><svg width="18" height="18" viewBox="0 0 18 18" shape-rendering="crispEdges"><path d="M5 4h12v12H5z" fill="#000" fill-opacity="0.4"/><path d="M3 2h12v2H3z M3 14h12v2H3z" fill="var(--text)"/><path d="M4 4h10v2H4z M5 6h8v2H5z M6 8h6v2H6z M7 10h4v2H7z M6 12h6v2H6z" fill="var(--muted)" fill-opacity="0.2"/><path d="M4 4h2v2H4z M12 4h2v2h-2z M5 6h2v2H5z M11 6h2v2h-2z M6 8h2v2H6z M10 8h2v2h-2z M6 12h2v2H6z M10 12h2v2h-2z M5 14h2v2H5z M11 14h2v2h-2z" fill="var(--muted)"/><path d="M6 4h6v2H6z M7 6h4v1H7z" fill="var(--accent)"><animate attributeName="opacity" values="1;0;1" dur="3s" repeatCount="indefinite" /></path><path d="M8 8h2v2H8z" fill="var(--accent)"><animateTransform attributeName="transform" type="translate" values="0,-2; 0,2; 0,-2" dur="0.5s" repeatCount="indefinite" /><animate attributeName="opacity" values="0;1;0" dur="0.5s" repeatCount="indefinite" /></path><path d="M7 13h4v1H7z M6 14h6v2H6z" fill="var(--accent)"/></svg></span>
-        <span>Local scrubbing is in active development, shipping in a future release. Until then, you control exactly what context you share.</span>
+        <span style="padding-top:2px"><svg width="18" height="18" viewBox="0 0 18 18" shape-rendering="crispEdges"><path d="M5 4h12v12H5z" fill="#000" fill-opacity="0.4"/><path d="M3 2h12v2H3z M3 14h12v2H3z" fill="var(--text)"/><path d="M4 4h10v2H4z M5 6h8v2H5z M6 8h6v2H6z M7 10h4v2H7z M6 12h6v2H6z" fill="var(--muted)" fill-opacity="0.2"/><path d="M4 4h2v2H4z M12 4h2v2h-2z M5 6h2v2H5z M11 6h2v2h-2z M6 8h2v2H6z M10 8h2v2h-2z M6 12h2v2H6z M10 12h2v2h-2z M5 14h2v2H5z M11 14h2v2h-2z" fill="var(--muted)"/><path d="M6 4h6v2H6z M7 6h4v1H7z" fill="var(--green)"><animate attributeName="opacity" values="1;0;1" dur="3s" repeatCount="indefinite" /></path><path d="M8 8h2v2H8z" fill="var(--green)"><animateTransform attributeName="transform" type="translate" values="0,-2; 0,2; 0,-2" dur="0.5s" repeatCount="indefinite" /><animate attributeName="opacity" values="0;1;0" dur="0.5s" repeatCount="indefinite" /></path><path d="M7 13h4v1H7z M6 14h6v2H6z" fill="var(--green)"/></svg></span>
+        <span>Live as of v0.1.1: Privacy Mirror scrubs PII on every cloud call (local models get raw text) and you still control exactly what context you share.</span>
       </div>
       <div class="priv-stats-grid">
         <div class="pstat">
-          <div class="pstat-n" style="color:var(--accent);font-size:17px;font-weight:700;padding-top:4px">In Dev</div>
+          <div class="pstat-n" style="color:var(--green);font-size:17px;font-weight:700;padding-top:4px">Live</div>
           <div class="pstat-t">Local scrubbing</div>
         </div>
         <div class="pstat">
@@ -715,8 +720,8 @@
         <div class="priv-step">
           <div class="ps-n">02</div>
           <div>
-            <div class="ps-t">Local Scrubber <span class="cs-tag">coming soon</span></div>
-            <div class="ps-s">A small on-device model strips names, emails, passwords, keys from your context before anything hits the network. Deterministic rules backstop it.</div>
+            <div class="ps-t">Local Scrubber <span class="cs-tag" style="color:var(--green)">live</span></div>
+            <div class="ps-s">A small on-device model strips names, emails, passwords, keys from your context before it reaches a cloud AI. Deterministic regex rules backstop it, and placeholders are reversed in the reply.</div>
           </div>
         </div>
         <div class="priv-step">
@@ -730,7 +735,7 @@
           <div class="ps-n">04</div>
           <div>
             <div class="ps-t">Back to You</div>
-            <div class="ps-s">Frontier AI power. Your privacy, intact. That's the thesis. That's what we're building.</div>
+            <div class="ps-s">Frontier AI power. Your privacy, intact. That's the thesis, and it's shipping now.</div>
           </div>
         </div>
       </div>
@@ -827,7 +832,7 @@
     privacy: {
       u: "Wait, can you actually see my data?",
       t: 1600,
-      a: "Honestly, yes, I see your context right now. But local scrubbing is in development. Once that ships, a small on-device model strips your PII before anything hits the network. Until then, you control what gets shared. Building it as fast as we can."
+      a: "Locally? Yeah, that's the whole point, I run on your machine. But the cloud brain? It gets a redacted version. As of v0.1.1, Privacy Mirror swaps your PII for placeholders before anything leaves the device, then swaps it back in my reply. Local models see the raw text; the cloud never learns who you are. You still control what gets shared."
     },
     rude: {
       u: "you're actually terrible lmao",
